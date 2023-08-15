@@ -14,9 +14,8 @@ class CaixaDaLanchonete {
 
     calcularValorDaCompra(metodoDePagamento, itens) {
 
-        if (!itens || itens.length === 0) {
+        if (!itens || itens.length === 0) 
             return "Não há itens no carrinho de compra!";
-        }
 
         let valorTotal = 0;
 
@@ -25,38 +24,36 @@ class CaixaDaLanchonete {
 
             const itemCardapio = this.CARDAPIO.find((item) => item.codigo === codigo);
 
-            if (!itemCardapio) {
+            if (!itemCardapio)
                 return "Item inválido!";
-            } else if (qntd <= 0) {
+            else if (qntd <= 0) 
                 return "Quantidade inválida!";
-            }
 
-        valorTotal += itemCardapio.valor * qntd;
+            valorTotal += itemCardapio.valor * qntd;
 
-        if (itemCardapio.extra && !itens.find((item) => item.split(",")[0] === itemCardapio.extra)) {
-            return "Item extra não pode ser pedido sem o principal";
-        }
-        
+            if (itemCardapio.extra && !itens.find((item) => item.split(",")[0] === itemCardapio.extra)) 
+                return "Item extra não pode ser pedido sem o principal";
         }
 
-    switch (metodoDePagamento) {
-        case "dinheiro":
-            valorTotal *= 0.95;
-            break;
+        switch (metodoDePagamento) {
+            case "dinheiro":
+                valorTotal *= 0.95;
+                break;
 
-        case "credito":
-            valorTotal *= 1.03;
-            break;
+            case "credito":
+                valorTotal *= 1.03;
+                break;
 
-        case "debito":
-            break;
+            case "debito":
+                break;
 
-        default:
-            return "Forma de pagamento inválida!";
+            default:
+                return "Forma de pagamento inválida!";
+        }
+
+        return `R$ ${valorTotal.toFixed(2).replace(".", ",")}`;
+
     }
-
-    return `R$ ${valorTotal.toFixed(2).replace(".", ",")}`;
-  }
 }
 
 export { CaixaDaLanchonete };
